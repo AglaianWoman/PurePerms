@@ -118,7 +118,6 @@ class PurePerms extends PluginBase
         
         switch(strtolower($providerName))
         {
-            /*
             case "mysql":
 
                 $provider = new MySQLProvider($this);
@@ -126,7 +125,6 @@ class PurePerms extends PluginBase
                 if($onEnable == true) $this->getLogger()->info($this->getMessage("logger_messages.setProvider_MySQL"));
 
                 break;
-             */
 
             case "sqlite3":
             
@@ -491,7 +489,6 @@ class PurePerms extends PluginBase
 
         $uniqueId = $player->getUniqueId()->toString();
 
-        // TODO: Fix 'Illegal offset type in isset or empty' error
         if(isset($this->attachments[$uniqueId])) $this->unregisterPlayer($player);
 
         $attachment = $player->addAttachment($this);
