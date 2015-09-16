@@ -7,6 +7,7 @@ use _64FF00\PurePerms\event\PPGroupChangedEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerKickEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 
@@ -17,14 +18,14 @@ class PPListener implements Listener
     /* PurePerms by 64FF00 (xktiverz@gmail.com, @64ff00 for Twitter) */
 
     /*
-          # #    #####  #       ####### #######   ###     ###   
-          # #   #     # #    #  #       #        #   #   #   #  
-        ####### #       #    #  #       #       #     # #     # 
-          # #   ######  #    #  #####   #####   #     # #     # 
-        ####### #     # ####### #       #       #     # #     # 
-          # #   #     #      #  #       #        #   #   #   #  
-          # #    #####       #  #       #         ###     ###                                        
-                                                                                       
+          # #    #####  #       ####### #######   ###     ###
+          # #   #     # #    #  #       #        #   #   #   #
+        ####### #       #    #  #       #       #     # #     #
+          # #   ######  #    #  #####   #####   #     # #     #
+        ####### #     # ####### #       #       #     # #     #
+          # #   #     #      #  #       #        #   #   #   #
+          # #    #####       #  #       #         ###     ###
+
     */
 
     /**
@@ -66,6 +67,28 @@ class PPListener implements Listener
         $player = $event->getPlayer();
 
         $this->plugin->registerPlayer($player);
+    }
+
+    /**
+     * @param PlayerLoginEvent $event
+     * @priority LOWEST
+     */
+    public function onPlayerLogin(PlayerLoginEvent $event)
+    {
+        $player = $event->getPlayer();
+
+        $this->plugin->registerPlayer($player);
+    }
+
+    /**
+     * @param PlayerKickEvent $event
+     * @priority HIGHEST
+     */
+    public function onPlayerKick(PlayerKickEvent $event)
+    {
+        $player = $event->getPlayer();
+
+        $this->plugin->unregisterPlayer($player);
     }
 
     /**
